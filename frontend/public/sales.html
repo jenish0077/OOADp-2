@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velour – Sales</title>
+    <link rel="stylesheet" href="sales.css">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="logo">Velour</div>
+    <nav class="nav-menu">
+        <div class="nav-item" onclick="window.location.href='dashboard.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Dashboard</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='products.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Products</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='billing.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Billing</span>
+        </div>
+        <div class="nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Sales</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='report.html'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            <span>Report</span>
+        </div>
+    </nav>
+    <div class="logout" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        <span>Logout</span>
+    </div>
+</aside>
+
+<main class="main-content">
+
+    <div class="header">
+        <h1>Sales</h1>
+        <div class="profile-wrapper">
+            <div class="profile-icon" id="profileBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="dropdown-user">
+                    <div class="dropdown-avatar">A</div>
+                    <div>
+                        <div class="dropdown-name">Administrator</div>
+                        <div class="dropdown-role">Admin Account</div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-logout" id="dropdownLogout">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Logout
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-label">Total Today's Sale</div>
+            <div class="skeleton skel-value" id="skelTodaySale"></div>
+            <div class="skeleton skel-date" id="skelDate1"></div>
+            <div class="stat-value" id="valTodaySale" style="display:none"></div>
+            <div class="stat-date" id="dateTodaySale" style="display:none"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Total Bills</div>
+            <div class="skeleton skel-value" id="skelTotalBills"></div>
+            <div class="skeleton skel-date" id="skelDate2"></div>
+            <div class="stat-value" id="valTotalBills" style="display:none"></div>
+            <div class="stat-date" id="dateTotalBills" style="display:none"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Monthly Revenue</div>
+            <div class="skeleton skel-value" id="skelMonthlyRev"></div>
+            <div class="skeleton skel-date" id="skelDate3"></div>
+            <div class="stat-value" id="valMonthlyRev" style="display:none"></div>
+            <div class="stat-date" id="dateMonthlyRev" style="display:none"></div>
+        </div>
+    </div>
+
+    <!-- FILTERS + TABLE -->
+    <div class="table-section">
+        <div class="filters">
+            <div class="filter-input">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+                <input type="text" id="billIdFilter" placeholder="Bill Id" oninput="filterTable()">
+            </div>
+            <div class="filter-input">
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+               <input type="text" id="dateFilter" placeholder="Search by date" oninput="filterTable()">
+            </div>
+        </div>
+
+        <!-- skeleton table -->
+        <table id="skeletonTable">
+            <thead>
+                <tr><th>Bill Id</th><th>Date</th><th>Item</th><th>Total Amount</th><th>Payment Method</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+                <tr class="skel-row"><td><div class="skeleton skel-cell" style="width:40px"></div></td><td><div class="skeleton skel-cell" style="width:80px"></div></td><td><div class="skeleton skel-cell" style="width:30px"></div></td><td><div class="skeleton skel-cell" style="width:70px"></div></td><td><div class="skeleton skel-cell" style="width:60px"></div></td><td><div class="skeleton skel-cell" style="width:50px"></div></td></tr>
+                <tr class="skel-row"><td><div class="skeleton skel-cell" style="width:40px"></div></td><td><div class="skeleton skel-cell" style="width:80px"></div></td><td><div class="skeleton skel-cell" style="width:30px"></div></td><td><div class="skeleton skel-cell" style="width:70px"></div></td><td><div class="skeleton skel-cell" style="width:60px"></div></td><td><div class="skeleton skel-cell" style="width:50px"></div></td></tr>
+                <tr class="skel-row"><td><div class="skeleton skel-cell" style="width:40px"></div></td><td><div class="skeleton skel-cell" style="width:80px"></div></td><td><div class="skeleton skel-cell" style="width:30px"></div></td><td><div class="skeleton skel-cell" style="width:70px"></div></td><td><div class="skeleton skel-cell" style="width:60px"></div></td><td><div class="skeleton skel-cell" style="width:50px"></div></td></tr>
+            </tbody>
+        </table>
+
+        <!-- real table -->
+        <table id="realTable" style="display:none">
+            <thead>
+                <tr><th>Bill Id</th><th>Date</th><th>Item</th><th>Total Amount</th><th>Payment Method</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- empty state -->
+        <div id="tableEmpty" class="empty-state" style="display:none">
+            <div class="empty-icon">🧾</div>
+            <p>No sales records yet. Bills will appear here after billing.</p>
+        </div>
+
+        <!-- pagination -->
+        <div class="pagination" id="pagination" style="display:none">
+            <span id="pageInfo"></span>
+            <div class="page-controls">
+                <button class="page-btn" id="prevBtn" onclick="changePage(-1)">&#8249;</button>
+                <span class="page-num" id="pageNum">1</span>
+                <button class="page-btn" id="nextBtn" onclick="changePage(1)">&#8250;</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="auth.js"></script>
+<script src="sales.js"></script>
+</body>
+</html>

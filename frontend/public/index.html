@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Velour</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="auth.js"></script>
+</head>
+
+<body>
+
+<div class="login-box">
+    <h2>Velour Login</h2>
+
+    <div id="errorMessage" class="error-message" style="display: none; color: #e53e3e; margin-bottom: 10px;"></div>
+
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username (min 3 chars)" required>
+        <input type="password" id="password" placeholder="Password (4-6 chars)" minlength="4" maxlength="6" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <p style="text-align: center; font-size: 12px; margin-top: 10px;">
+        Demo: Use any username and password matching the requirements
+    </p>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('errorMessage');
+
+    errorMsg.style.display = 'none';
+
+    // Validation
+    if (username.length < 3) {
+        errorMsg.textContent = 'Username must be at least 3 characters';
+        errorMsg.style.display = 'block';
+        return;
+    }
+
+    if (password.length < 4 || password.length > 6) {
+        errorMsg.textContent = 'Password must be between 4 to 6 characters';
+        errorMsg.style.display = 'block';
+        return;
+    }
+
+    try {
+        await Auth.login(username, password);
+        // Redirect to dashboard after successful login
+        window.location.href = 'dashboard.html';
+    } catch (error) {
+        errorMsg.textContent = error.message;
+        errorMsg.style.display = 'block';
+    }
+});
+</script>
+
+</body>
+</html>
